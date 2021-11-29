@@ -24,8 +24,6 @@ import java.util.*
 
 class FormFragment : Fragment(), TimePickerListener, AdapterView.OnItemSelectedListener {
 
-    private val repository = Repository()
-    //private val mainViewModel = MainViewModel(repository)
     private val mainViewModel: MainViewModel by activityViewModels()
     private var _tarefaSelecionada: Tarefas? = null
     private val tarefaSelecionada get() = _tarefaSelecionada!!
@@ -116,8 +114,6 @@ class FormFragment : Fragment(), TimePickerListener, AdapterView.OnItemSelectedL
 
     private fun carregarDados() {
         _tarefaSelecionada = mainViewModel.tarefaSelecionada
-        Log.d("Pinto", _tarefaSelecionada.toString())
-        Log.d("Pinto", mainViewModel.tarefaSelecionada.toString())
         if (_tarefaSelecionada != null) {
             binding.editNome.setText(tarefaSelecionada.name)
             binding.editDesc.setText(tarefaSelecionada.description)
