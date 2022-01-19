@@ -9,6 +9,11 @@ interface ApiService {
     @GET("api/todo")
     suspend fun listTarefas(): Response<List<Tarefas>>
 
+    @GET("api/todo/{valor}")
+    suspend fun findTarefaById(
+        @Path("valor") valor: Int
+    ): Response<Tarefas>
+
     @POST("api/todo")
     suspend fun addTarefa(
         @Body tarefas: Tarefas

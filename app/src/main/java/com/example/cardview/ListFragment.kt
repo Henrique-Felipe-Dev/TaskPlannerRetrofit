@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +20,8 @@ import com.example.cardview.databinding.FragmentListBinding
 import com.example.cardview.model.Tarefas
 import com.example.cardview.repository.Repository
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 
 class ListFragment : Fragment(), TaskItemClickListener {
@@ -41,11 +44,20 @@ class ListFragment : Fragment(), TaskItemClickListener {
         binding.recyclerTarefa.setHasFixedSize(true)
 
         mainViewModel.listTarefas()
+        /*
         mainViewModel.myResponse.observe(viewLifecycleOwner, {
             response ->
             response.body()?.let { adapter.setData(it) }
         })
+         */
 
+        lifecycleScope.launch {
+            mainViewModel.myQueryResponse.collect {
+            response -> adapter.setData(response)
+            Log.d("Pinto", response.toString())
+        } }
+
+        /*
         mainViewModel.myDeleteResponse.observe(viewLifecycleOwner, {
             mainViewModel.listTarefas()
             Toast.makeText(
@@ -53,6 +65,7 @@ class ListFragment : Fragment(), TaskItemClickListener {
                 Toast.LENGTH_LONG
             ).show()
         })
+         */
 
         binding.floatingActionButton.setOnClickListener {
             mainViewModel.tarefaSelecionada = null

@@ -25,6 +25,7 @@ import java.util.*
 class FormFragment : Fragment(), TimePickerListener, AdapterView.OnItemSelectedListener {
 
     private val mainViewModel: MainViewModel by activityViewModels()
+
     private var _tarefaSelecionada: Tarefas? = null
     private val tarefaSelecionada get() = _tarefaSelecionada!!
 

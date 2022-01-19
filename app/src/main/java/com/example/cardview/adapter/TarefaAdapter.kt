@@ -48,7 +48,7 @@ class TarefaAdapter (
         holder.textStatus.text = tarefa.status
 
         holder.buttonDeletar.setOnClickListener {
-            mainViewModel.deleteTarefa(tarefa.id)
+            mainViewModel.deleteTarefa(tarefa)
         }
 
         holder.itemView.setOnClickListener {
